@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Whale Background</title>
+    <style>
+
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #ffd1dc, #8000ff);
@@ -25,6 +31,35 @@
             justify-content: center;
             align-items: center;
         }
+        
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .whale {
+            position: absolute;
+            font-size: 40px; /* Dimensione delle balene */
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -50%);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(50vw, 50vh) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, -100vh);
+                opacity: 0.5;
+            }
+        }
+    
 
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -450,6 +485,27 @@
 
         setInterval(createStar, 500);
         setInterval(createOfLogo, 500);
+
+        const whaleEmojis = ['🐋', '🐳']; // Array con le balene emoji
+
+        function createWhale() {
+            const whale = document.createElement('div');
+            whale.classList.add('whale');
+            whale.textContent = whaleEmojis[Math.floor(Math.random() * whaleEmojis.length)]; // Scegli una balena casuale
+            whale.style.left = Math.random() * 100 + 'vw'; // Posizione orizzontale casuale
+            whale.style.top = Math.random() * 100 + 'vh'; // Posizione verticale casuale
+            whale.style.fontSize = Math.random() * 20 + 30 + 'px'; // Dimensione casuale
+            whale.style.animationDuration = Math.random() * 5 + 5 + 's'; // Durata animazione casuale
+
+            document.body.appendChild(whale);
+
+            // Rimuove la balena dopo che l'animazione è finita
+            setTimeout(() => whale.remove(), 10000);
+        }
+
+        // Crea balene a intervalli regolari
+        setInterval(createWhale, 500);
+        
     </script>
 </body>
 </html>
