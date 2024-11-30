@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #ffd1dc, #8000ff);
@@ -26,30 +25,6 @@
             justify-content: center;
             align-items: center;
         }
-        
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-
-        @keyframes float {
-            0% {
-                transform: translate(-50%, -50%);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translate(50vw, 50vh) scale(1.2);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(100vw, -100vh);
-                opacity: 0.5;
-            }
-        }
-    
 
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -68,42 +43,6 @@
             overflow-y: auto;
             text-align: center;
         }
-
-        .whale {
-            position: absolute;
-            font-size: 40px; /* Dimensione delle balene */
-            animation: vibrate 1.5s infinite ease-in-out;
-        }
-
-         @keyframes vibrate {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-2px, 2px); }
-            50% { transform: translate(2px, -2px); }
-            75% { transform: translate(-2px, -2px); }
-            100% { transform: translate(2px, 2px); }
-        }
-
-        .matrix-area {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .safe-zone {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: transparent;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
-        
         
         header {
             color: #fff;
@@ -112,8 +51,6 @@
             text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
             margin-bottom: 15px;
         }
-
-        
         
         #profile {
             position: relative;
@@ -513,50 +450,7 @@
 
         setInterval(createStar, 500);
         setInterval(createOfLogo, 500);
-
-        const matrixArea = document.querySelector('.matrix-area');
-        const whaleEmojis = ['🐳', '🐳']; // Balene emoji
-        const rows = 5; // Numero di righe nella matrice
-        const cols = 5; // Numero di colonne nella matrice
-        const safeZone = {
-            x: window.innerWidth / 2 - 150, // Posizione centrale del contenitore (calcolata)
-            y: window.innerHeight / 2 - 150,
-            width: 300,
-            height: 300
-        };
-
-        function isInsideSafeZone(x, y) {
-            return (
-                x > safeZone.x &&
-                x < safeZone.x + safeZone.width &&
-                y > safeZone.y &&
-                y < safeZone.y + safeZone.height
-            );
-        }
-
-        function generateWhales() {
-            const whaleWidth = 100; // Larghezza approssimata delle celle
-            const whaleHeight = 100; // Altezza approssimata delle celle
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = col * whaleWidth + whaleWidth / 2;
-                    const y = row * whaleHeight + whaleHeight / 2;
-
-                    if (!isInsideSafeZone(x, y)) {
-                        const whale = document.createElement('div');
-                        whale.classList.add('whale');
-                        whale.textContent = whaleEmojis[Math.floor(Math.random() * whaleEmojis.length)];
-                        whale.style.left = x + 'px';
-                        whale.style.top = y + 'px';
-                        matrixArea.appendChild(whale);
-                    }
-                }
-            }
-        }
-
-        generateWhales();
-
-        
     </script>
 </body>
+</html>
 </html>
