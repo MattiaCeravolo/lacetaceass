@@ -514,55 +514,47 @@
         setInterval(createStar, 500);
         setInterval(createOfLogo, 500);
 
-        const whaleEmojis = ['🐳']; // Array con le balene emoji
+        const matrixArea = document.querySelector('.matrix-area');
+        const whaleEmojis = ['🐳', '🐳']; // Balene emoji
+        const rows = 5; // Numero di righe nella matrice
+        const cols = 5; // Numero di colonne nella matrice
+        const safeZone = {
+            x: window.innerWidth / 2 - 150, // Posizione centrale del contenitore (calcolata)
+            y: window.innerHeight / 2 - 150,
+            width: 300,
+            height: 300
+        };
 
-        function createWhale() {
-            const whale = document.createElement('div');
-            whale.classList.add('whale');
-            whale.textContent = whaleEmojis[Math.floor(Math.random() * whaleEmojis.length)]; // Scegli una balena casuale
-    
-            // Posizionamento simmetrico
-            const numColumns = 5; // Numero di colonne di balene
-            const numRows = 5; // Numero di righe di balene
-    
-            const columnWidth = 100 / numColumns; // Larghezza di ogni colonna in vw
-            const rowHeight = 100 / numRows; // Altezza di ogni riga in vh
-    
-            const column = Math.floor(Math.random() * numColumns); // Colonna casuale
-            const row = Math.floor(Math.random() * numRows); // Riga casuale
-    
-            whale.style.left = column * columnWidth + columnWidth / 2 + 'vw'; // Posizionamento orizzontale centrato nella cella
-            whale.style.top = row * rowHeight + rowHeight / 2 + 'vh'; // Posizionamento verticale centrato nella cella
-            whale.style.fontSize = Math.random() * 20 + 30 + 'px'; // Dimensione casuale
-    
-            // Effetto di vibrazione
-            whale.style.animation = `vibrate ${Math.random() * 2 + 1}s infinite ease-in-out`; // Durata vibrazione casuale
-    
-            document.body.appendChild(whale);
-    
-            // Rimuove la balena dopo un determinato tempo
-            setTimeout(() => whale.remove(), 10000);
+        function isInsideSafeZone(x, y) {
+            return (
+                x > safeZone.x &&
+                x < safeZone.x + safeZone.width &&
+                y > safeZone.y &&
+                y < safeZone.y + safeZone.height
+            );
         }
-    
-        // Aggiungi l'animazione di vibrazione al CSS
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes vibrate {
-                0% { transform: translate(0, 0); }
-                25% { transform: translate(-2px, 2px); }
-                50% { transform: translate(2px, -2px); }
-                75% { transform: translate(-2px, -2px); }
-                100% { transform: translate(2px, 2px); }
+
+        function generateWhales() {
+            const whaleWidth = 100; // Larghezza approssimata delle celle
+            const whaleHeight = 100; // Altezza approssimata delle celle
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const x = col * whaleWidth + whaleWidth / 2;
+                    const y = row * whaleHeight + whaleHeight / 2;
+
+                    if (!isInsideSafeZone(x, y)) {
+                        const whale = document.createElement('div');
+                        whale.classList.add('whale');
+                        whale.textContent = whaleEmojis[Math.floor(Math.random() * whaleEmojis.length)];
+                        whale.style.left = x + 'px';
+                        whale.style.top = y + 'px';
+                        matrixArea.appendChild(whale);
+                    }
+                }
             }
-    
-            .whale {
-                position: absolute;
-            }
-        `;
-        document.head.appendChild(style);
-    
-        // Crea balene a intervalli regolari
-        setInterval(createWhale, 500);
+        }
+
+        generateWhales();
 
         
     </script>
